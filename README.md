@@ -1,2 +1,2 @@
 # VibeCheck
- A web app that provides users with a quick and easy to digest sentiment analysis of daily news
+Welcome to VibeCheck, a web application that delivers quick and easy-to-digest sentiment analyses of daily news using AI.
