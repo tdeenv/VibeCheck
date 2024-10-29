@@ -1,17 +1,18 @@
+# imports
 import os
 import json
 import time
 from dotenv import load_dotenv
 import requests
 from bs4 import BeautifulSoup
-import openai  # Import the OpenAI package
+import openai  
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Selecting API key
 API_KEY = os.getenv("OPENAI_API_KEY")
-url_1 = os.getenv("url_1")  # Ensure you have this URL defined in your .env file
+url_1 = os.getenv("url_1") 
 
 # Set the API key for OpenAI
 openai.api_key = API_KEY
@@ -31,10 +32,10 @@ def scrape_article_info(url):
 
     articles_info = []
     for link in soup.find_all('a', attrs={'data-testid': 'article-link'}):
-        title = link.text.strip()  # Get the text of the link (the article title)
+        title = link.text.strip() 
         
         # Find the corresponding snippet by navigating the DOM
-        snippet = link.find_next('p', class_='_3XEsE')  # Adjust the class name as necessary
+        snippet = link.find_next('p', class_='_3XEsE')
         snippet_text = snippet.text.strip() if snippet else "No snippet available"  # Get the snippet text if exists
 
         articles_info.append({
@@ -62,7 +63,7 @@ def analyze_sentiment(articles_info):
     for attempt in range(max_retries):
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",  # Ensure you're using the correct model
+                model="gpt-3.5-turbo",
                 messages=messages
             )
             return response['choices'][0]['message']['content']  # Adjusted to get content from the response
